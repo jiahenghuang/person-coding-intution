@@ -1,6 +1,0 @@
-model_checkpoint_path: "/Users/mancha/Work/Robot/code/intention-recognition/models/yuanyi/model-528"
-all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/yuanyi/model-200"
-all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/yuanyi/model-300"
-all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/yuanyi/model-400"
-all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/yuanyi/model-500"
-all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/yuanyi/model-528"

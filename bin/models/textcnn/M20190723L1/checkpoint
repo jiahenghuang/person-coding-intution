@@ -1,6 +1,0 @@
-model_checkpoint_path: "/Users/mancha/Work/Robot/code/intention-recognition/models/divorced/model-480"
-all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/divorced/model-100"
-all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/divorced/model-200"
-all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/divorced/model-300"
-all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/divorced/model-400"
-all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/divorced/model-480"

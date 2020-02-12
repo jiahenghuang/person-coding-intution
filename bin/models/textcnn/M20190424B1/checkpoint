@@ -1,6 +1,0 @@
-model_checkpoint_path: "/home/heng/projects/textcnn-model/textcnn-model/models/model-552"
-all_model_checkpoint_paths: "/home/heng/projects/textcnn-model/textcnn-model/models/model-200"
-all_model_checkpoint_paths: "/home/heng/projects/textcnn-model/textcnn-model/models/model-300"
-all_model_checkpoint_paths: "/home/heng/projects/textcnn-model/textcnn-model/models/model-400"
-all_model_checkpoint_paths: "/home/heng/projects/textcnn-model/textcnn-model/models/model-500"
-all_model_checkpoint_paths: "/home/heng/projects/textcnn-model/textcnn-model/models/model-552"
