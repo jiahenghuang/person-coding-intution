@@ -1,0 +1,124 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          PackageManager
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: start PackageManager for PA Bank.
+### END INIT INFO
+#
+# chkconfig: 2345  80 50
+# description: PackageManager is for testing how to write service in Linux
+#
+# processname: PackageManager
+#
+# Source function library.
+# . /etc/rc.d/init.d/functions
+
+ret=0
+runpath="~/projects/chat-bot/bin"
+PID_FILE=$runpath/ChatBotManager.pid
+# export HOME=/home/ChatBot
+start() {
+    # check fdb status
+                echo "start ChatBot"
+                local result=""
+                if [ -f $PID_FILE ]; then
+                  while read line;
+                   do
+                      echo $line;
+                      result=$( ps | grep $line )
+                      # echo $result
+                      if [ "$result" = "" ] ; then
+                          echo "process has down, rm pid file,and start function again!"
+                          rm -f $PID_FILE
+                          break
+                      else
+                          echo "service has started!"
+                          exit 0
+                      fi
+                   done < $PID_FILE
+                fi
+
+                if [ "$runpath" = "" ]
+                then
+                  echo "please set function runpath!"
+                  exit 1
+                else
+                  echo "runpath is set !"
+
+                  cd $runpath/
+                  python3 analyze_chat.py &
+                  echo $!>>$PID_FILE
+                  ret=$?
+                fi
+
+}
+
+stop() {
+                echo "stop ChatBot"
+                local result=""
+                if [ -f $PID_FILE ]; then
+                  echo "has started"
+                  while read line;
+                   do
+                      echo $line;
+                      result=$( ps | grep $line )
+                      if [ -n "$result" ] ; then
+                        kill -9 $line
+                        ret=$?
+                      fi
+                   done < $PID_FILE
+
+                   echo "clear pid file"
+                   rm -f $PID_FILE
+                 else
+                   echo "hava not pid file, function has not started"
+                fi
+}
+
+status() {
+                local result=""
+                echo "check status of ChatBot..."
+                #lines=$( ps -ef | grep java | grep -v grep  |  )
+                #echo $lines
+                if [ -f $PID_FILE ]; then
+                  while read line;
+                   do
+                      result=$( ps | grep $line )
+                   done < $PID_FILE
+                fi
+
+                echo $result
+                if [ "$result" = "" ] ; then
+                    echo "ChatBot is Not online"
+                    ret=1
+                else
+                    echo "ChatBot is online"
+                    ret=0
+                fi
+                echo "check status of ChatBot...done."
+}
+
+# See how we were called.
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status
+        ;;
+  restart)
+        stop
+        start
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|status}"
+        exit 1
+esac
+
+exit $ret
