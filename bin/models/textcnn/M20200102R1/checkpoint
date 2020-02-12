@@ -1,0 +1,6 @@
+model_checkpoint_path: "/Users/mancha/Work/Robot/code/intention-recognition/models/zhaopin/model-600"
+all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/zhaopin/model-200"
+all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/zhaopin/model-300"
+all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/zhaopin/model-400"
+all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/zhaopin/model-500"
+all_model_checkpoint_paths: "/Users/mancha/Work/Robot/code/intention-recognition/models/zhaopin/model-600"

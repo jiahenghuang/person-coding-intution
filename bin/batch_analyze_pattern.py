@@ -302,15 +302,15 @@ class PatternAnalyzer(object):
         if long:
             if keywordVersion:
                 sorted_group = self.parsed_pats[keywordVersion][0]
-            else:
-                logger.fatal('<%s> and <%s> does not exist' % (questionId, keywordVersion))
-                sys.exit(-1)
+            # else:
+            #     logger.fatal('<%s> and <%s> does not exist' % (questionId, keywordVersion))
+            #     sys.exit(-1)
         else:
             if keywordVersion:
                 sorted_group = self.parsed_pats[keywordVersion][1]
-            else:
-                logger.fatal('<%s> and <%s> does not exist' % (questionId, keywordVersion))
-                sys.exit(-1)
+            # else:
+            #     logger.fatal('<%s> and <%s> does not exist' % (questionId, keywordVersion))
+            #     sys.exit(-1)
 
         for rank_group in sorted_group:
             match_group = rank_group[0]  # 包含不包含group

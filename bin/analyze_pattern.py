@@ -68,7 +68,7 @@ class PatternAnalyzer(object):
             logger.fatal('value pattern file <%s> does not exist'%(pat_fname))
             sys.exit(-1)
 
-        with open(pat_fname) as fr:
+        with open(pat_fname, "r", encoding="utf-8") as fr:
             pats = fr.readlines()
 
         pats = [pat.strip() for pat in pats]
@@ -399,7 +399,7 @@ if __name__ == '__main__' :
     
     line1 = '嗯嗯，我忘记了，然后我现在在上班'
     line2 = '我是单身啊哈哈哈哈哈'
-    line2 = '关你什么事'
+    line2 = '是的'
     
     textLen = len(line2)
     if textLen > 6:
@@ -408,5 +408,5 @@ if __name__ == '__main__' :
         flag=False
     # result = pattern_analyzer.parse(line1,long=flag)
     line2 = asr_analyzer.analyze(line2, long=flag)
-    result = pattern_analyzer.parse(line2,long=flag, keywordVersion = 'V20190402')
+    result = pattern_analyzer.parse(line2,long=flag, keywordVersion = 'K20190402A2')
     print(result)

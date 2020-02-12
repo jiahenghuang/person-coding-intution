@@ -2,9 +2,10 @@
 
 #电话聊天机器人思路：
 1. 文本进来先做纠错
-2. 匹配kd，如果匹配到kd则先回答用户问题，然后进行意图识别
-3. 进行关键词识别意图
-4. 使用算法做兜底（暂时没集成进去）
+2. 根据传入参数决定调用 kd 或者意图识别
+  - reqType=1: FAQ 模型
+  - reqType=0: 意图识别模型
+     - 包括关键词识别意图和textcnn分类模型
 
 #文件目录结构
 
@@ -138,47 +139,91 @@
 
 #docker日志设置上限
 #vim /etc/docker/daemon.json
+
+```
+
 {
 "registry-mirrors":["http://f613ce8f.m.daocloud.io"],
 "log-driver":"json-file",
 "log-opts":{"max-size":"500m","max-file":"3"}
 }
+```
 
 #docker build方法
-重启docker服务  sudo service docker restart
-关闭docker服务  service docker stop
-开启docker服务  service docker start
+  - 重启docker服务  sudo service docker restart
+  - 关闭docker服务  service docker stop
+  - 开启docker服务  service docker start
 
 #build镜像
-docker build -t chat-bot:v1.x .
-进入 ./chat-bot/目录，sudo docker build .
+  - docker build -t chat-bot:v1.x .
+  - 进入 ./chat-bot/目录，sudo docker build .
 
 #运行镜像
-sudo docker run -p 127.0.0.1:8080:8080 chat-bot:v1.x
+  - sudo docker run -p 127.0.0.1:8080:8080 chat-bot:v1.x
 #开机自启动服务
-sudo docker run -p 127.0.0.1:8700:8700 --restart=always chat-bot:v1.2
-sudo docker run -d -p 10.1.71.252:8700:8700 --restart=always chat-bot:v1.2
+  - sudo docker run -p 127.0.0.1:8700:8700 --restart=always chat-bot:v1.2
+  - sudo docker run -d -p 10.1.71.252:8700:8700 --restart=always chat-bot:v1.2
 
 #停止镜像运行
-sudo docker stop imageid
+  - sudo docker stop imageid
 
 #删除所有容器
-sudo docker rm $(sudo docker ps -a -q)
+  - sudo docker rm $(sudo docker ps -a -q)
 
-#测试数据
-{"requestId":"123456","message":"亲爱的晚上不好意思这么晚才给你打电话哈，来呼叫你出山了啊啊啊","contextId":"haha","serviceCode":"hehe","reqType":1,"status":"A","describe":"asdfasd","startStamp":1,"requestType":0,"questionId":"single","keywordVersion":"V20190101"}
+#NLP服务测试样例
+##测试网址
+  - http://www.blue-zero.com/WebSocket/
+## 应用层封装
+1. 参数: serviceCode+status+modelId+message
+2. 样例
+```
+{"status":"A","message":"是的","serviceCode": "3000008","modelId":""}
+```
+
+## 老版本接口测试用例
+```
+{"contextId":"3D5n41907101435079295353","describe":"","kdAnswer":"","keywordVersion":"","message":"是的","questionId":"","reqType":"-1,0,1","requestId":"3D5n419071014350792953531562740511364","requestType":0,"serviceCode":"32","startStamp":1562740511364,"status":"A"}
+```
+## ASR 纠错
+```
+{"message":"我不但是", "reqType":"-1"}
+```
+## 意图识别
+### 测试单关键词结果
+```
+{"requestId":"123456","message":"没有时间","contextId":"haha","serviceCode":"hehe","reqType":"-1,0","status":"A","describe":"asdfasd","startStamp":1,"requestType":0,"keywordVersion":"K20190424B1","modelVersion":""}
+```
+### 测试融合结果
+```
+{"requestId":"123456","message":"没有时间","contextId":"haha","serviceCode":"hehe","reqType":"-1,0","status":"A","describe":"asdfasd","startStamp":1,"requestType":1,"keywordVersion":"K20190424B1","modelVersion":"M20190424B1"}
+```
+
+### 测试单模型结果
+```
+{"requestId":"123456","message":"没有时间","contextId":"haha","serviceCode":"hehe","reqType":"-1,0","status":"A","describe":"asdfasd","startStamp":1,"requestType":3,"keywordVersion":"","modelVersion":"M20190424B1"}
+```
+
+## kd 测试数据
+```
+{"requestId":"123456","message":"你哪里啊","contextId":"haha","serviceCode":"hehe","reqType":"1",
+ "status":"A","describe":"asdfasd","startStamp":1,"requestType":1,"questionId":"KD1-FAQ", "kdAnswer": "Tkd11"}
+```
+
+## 同时解析 kd 与 kd 结果
+```
+{"message":"没有时间","reqType":"-1,0,1","status":"A",
+"describe":"asdfasd","startStamp":1,"requestType":1,"keywordVersion":"K20190424B1","modelVersion":"M20190424B1",
+"questionId":"KD1-FAQ", "kdAnswer": ""}
+```
 
 #查看日志
-sudo docker logs --since 30m container-id
-sudo docker logs container-id
+  - sudo docker logs --since 30m container-id
+  - sudo docker logs container-id
 
 #
-systemctl daemon-reload
-systemctl restart docker
-
-#测试网址
-http://www.blue-zero.com/WebSocket/
+  - systemctl daemon-reload
+  - systemctl restart docker
 
 #自动部署
-sudo vi /etc/profile
-sudo docker run container-id
+  - sudo vi /etc/profile
+  - sudo docker run container-id

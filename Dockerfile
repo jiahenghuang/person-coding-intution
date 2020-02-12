@@ -1,6 +1,10 @@
-FROM debian
+FROM fanzfeng
 MAINTAINER www.zhenai.com
 ENV LANG C.UTF-8
+# ENV http_proxy http://proxy-chain.xxx.com:911/
+# ENV https_proxy http://proxy-chain.xxx.com:912/
+# ENV http_proxy http://username:password@proxy-chain.xxx.com:911/
+# ENV https_proxy http://username:password@proxy-chain.xxx.com:912/ 
 
 # Copy code
 RUN mkdir -p /src

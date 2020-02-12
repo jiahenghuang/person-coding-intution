@@ -18,11 +18,11 @@ class AsrAnalyzer(object):
         self.word_pat_short_yes, self.word_pat_short_no = self._build_pat(config.ambiguity_short)
         self.sp_pat=[re.compile('而且.*?(?!(什么))'),re.compile('而且.*什么')]
 
-    def _build_pat(self,file_path):
+    def _build_pat(self, file_path):
         '''
         解析pat
         '''
-        with open(file_path) as fr:
+        with open(file_path, "r", encoding="utf-8") as fr:
             pats = fr.readlines()
         ambi_pats = [pat.strip().split('=') for pat in pats if pat.startswith('$') and not pat.startswith('$$')]
 

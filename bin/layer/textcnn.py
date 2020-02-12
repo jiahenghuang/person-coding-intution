@@ -50,7 +50,7 @@ class TextCNNClassifier(object):
         self.num_epoches = config_calc.num_epoches
         self.l2_ratio = config_calc.l2_ratio
 
-        # tf.reset_default_graph()
+        tf.reset_default_graph()
         self.build_placeholder()
         self.build_embedding_layer()
         self.build_nn()
