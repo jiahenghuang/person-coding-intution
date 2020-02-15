@@ -1,4 +1,3 @@
-FROM fanzfeng
 MAINTAINER www.zhenai.com
 ENV LANG C.UTF-8
 # ENV http_proxy http://proxy-chain.xxx.com:911/

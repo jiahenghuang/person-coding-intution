@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-# version=3.6.4
-# @Date  : 2019/5/9
-# @Author  : fanzfeng
 
 import json
 import asyncio

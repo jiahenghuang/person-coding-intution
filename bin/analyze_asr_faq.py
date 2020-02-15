@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-# version=3.6.4
-# @Date  : 2019/3/30
-# @Author  : fanzfeng
 
 import os
 import time

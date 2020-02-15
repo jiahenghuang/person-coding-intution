@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-#@Author  : fanzfeng
-# add by fanzfeng 201905
 cid=$(sudo docker ps | grep chat-bot | awk '{print $1}')
 sudo docker stop $cid
 sudo docker rm $cid
