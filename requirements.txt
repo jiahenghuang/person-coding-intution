@@ -1,6 +1,6 @@
 pandas==0.24.2
 chardet==3.0.4
-numpy==1.16.2
+numpy==1.22.0
 DAWG==0.7.8
 jieba==0.39
 matplotlib==3.0.3
